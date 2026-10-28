@@ -55,4 +55,4 @@ Single-speaker synthesis of sacred Sanskrit recitation, for pārāyaṇa/study/a
 
 ## Citation
 *(BibTeX added with the arXiv report.)*
-"# vagdhenu" 
+"# vagdhenu"

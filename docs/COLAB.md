@@ -2,7 +2,7 @@
 
 This guide runs Vāgdhenu in a Colab Python 3.14 virtual environment with PyTorch 2.14.1 and CUDA 12.6. Colab does not expose Python 3.14 as a notebook kernel by default, so the first setup cell uses `uv` to create a 3.14 environment and run the project inside it.
 
-> The exact compatibility of every dependency with Python 3.14 should be checked on the first run. If the 3.14 environment cannot install an upstream package, use the project with Python 3.12 instead and pin the dependencies known to support that runtime.
+> Python 3.14 is the project's primary target, but upstream wheels may lag behind it. Prefer Python 3.12 as the fallback on Colab: use the pinned `requirements.txt` unchanged and do not introduce separate dependency pins unless an upstream package explicitly fails.
 
 ## 1. Create a GPU runtime
 
@@ -248,7 +248,7 @@ Wait for Gradio to print a local URL. In Colab, use the **proxy URL** printed be
 
 ### `pip install` reports no matching package
 
-Python 3.14 is new and upstream distributions may not publish a wheel for every dependency yet. Inspect the exact package and first verify whether source builds work. A Python 3.12 virtual environment is more likely to be supported by Colab and upstream ML packages:
+Python 3.14 is new and upstream distributions may not publish a wheel for every dependency yet. First inspect the exact package and verify whether a source build can succeed. If it cannot, use Python 3.12 as the documented fallback; it has broader upstream wheel support in Colab:
 
 ```bash
 %%bash
@@ -265,7 +265,9 @@ Do not run Python 3.12 and Python 3.14 setup cells together; create only the env
 
 ### Dependency conflicts in IndicF5
 
-Keep the pinned versions in `requirements.txt` and install the project as it is provided. Do not independently install a newer `transformers`, `accelerate`, or `x-transformers` release because IndicF5's import layout and inference API may change.
+Keep the pinned versions in `requirements.txt` and install the project as provided. The IndicF5 fork declares `numpy<=1.26.4`; the repository therefore pins `numpy==1.26.4`. Do not replace it with a NumPy 2.x release.
+
+Do not independently install newer `transformers`, `accelerate`, or `x-transformers` releases either: IndicF5's import layout and inference API may change. If Python 3.14 cannot resolve the requirements, switch to the Python 3.12 fallback above rather than changing those pins.
 
 ### `No module named f5_tts` or `bigvgan`
 
