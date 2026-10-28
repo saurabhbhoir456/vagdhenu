@@ -10,7 +10,7 @@ transformers==4.46.3
 accelerate==0.34.2
 vocos==0.1.0
 x-transformers==2.19.7
-numpy==2.5.4
+numpy==1.26.4
 librosa==0.11.0
 scipy
 soundfile

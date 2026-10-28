@@ -51,7 +51,7 @@ if [ -d vagdhenu/.git ]; then
   cd vagdhenu
   git pull --ff-only
 else
-  git clone https://github.com/prathoshap/vagdhenu.git vagdhenu
+  git clone https://github.com/saurabhbhoir456/vagdhenu vagdhenu
 fi
 ```
 
